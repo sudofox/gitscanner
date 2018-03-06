@@ -2,7 +2,7 @@
 
 SCRIPTDIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$SCRIPTDIR" ]]; then SCRIPTDIR="$PWD"; fi
-. "$SCRIPTDIR/formatting.sh"
+. "$SCRIPTDIR/includes.sh"
 
 usage() {
         echo "${COLOR_BOLD}Clone all repositories from all members of a GitHub organization${COLOR_RESET}"

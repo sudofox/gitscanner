@@ -1,0 +1,6 @@
+# exclude.txt
+# put any repositories we want to exclude from downloading/grepping here (uncommented)
+# one per line
+
+# example:
+# username/reponame

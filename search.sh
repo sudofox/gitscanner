@@ -12,7 +12,7 @@ popd () {
 
 SCRIPTDIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$SCRIPTDIR" ]]; then SCRIPTDIR="$PWD"; fi
-. "$SCRIPTDIR/formatting.sh"
+. "$SCRIPTDIR/includes.sh"
 
 usage() {
         echo "${COLOR_BOLD}Search all downloaded repositories, and history, for a string. Takes regex.${COLOR_RESET}"
