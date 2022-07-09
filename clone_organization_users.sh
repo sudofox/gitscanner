@@ -13,6 +13,7 @@ usage() {
 
 [ -z "$1" ] && usage
 
+# TODO paginate?
 USERS=$(curl -sL https://api.github.com/orgs/$1/members|jq -r '.[].login')
 
 for orguser in $USERS; do
