@@ -38,7 +38,7 @@ PAGE=1
 REPOS=""
 
 while true; do
-	NEXT_PAGE=$(get_repo_page $1 $PAGE)
+	NEXT_PAGE=$(get_repo_page $1 $PAGE) || exit $?
 	# append lines to REPOS
 	REPOS="$REPOS"$'\n'"$NEXT_PAGE"
 	# if count < 100, break
@@ -49,8 +49,10 @@ while true; do
 	PAGE=$((PAGE + 1))
 done
 
+echo "$REPOS" > repocache.txt
+
 for repo in $REPOS; do
-	if [[ $(comm -23 <(echo $repo | grep -Po "github.com\/\K.+?(?=.git)") <(cat exclude.txt | egrep -v '^[[:blank:]]*#|^[[:blank:]]*$' | sort | uniq) | wc -w) -lt 1 ]]; then
+	if [[ $(comm -23 <(echo $repo | grep -Po "github.com\/\K.+?(?=\.git)") <(cat exclude.txt | egrep -v '^[[:blank:]]*#|^[[:blank:]]*$' | sort | uniq) | wc -w) -lt 1 ]]; then
 		continue
 	fi
 
@@ -74,3 +76,5 @@ for repo in $REPOS; do
 	fi
 	popd > /dev/null
 done
+
+echo -e "${COLOR_RESET}"
