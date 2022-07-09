@@ -49,8 +49,6 @@ while true; do
 	PAGE=$((PAGE + 1))
 done
 
-echo "$REPOS" > repocache.txt
-
 for repo in $REPOS; do
 	if [[ $(comm -23 <(echo $repo | grep -Po "github.com\/\K.+?(?=\.git)") <(cat exclude.txt | egrep -v '^[[:blank:]]*#|^[[:blank:]]*$' | sort | uniq) | wc -w) -lt 1 ]]; then
 		continue
@@ -67,14 +65,14 @@ for repo in $REPOS; do
 
 	# if the repo doesn't exist, clone it
 	if [ ! -d "$SCRIPTDIR/repositories/$gituser/$gitrepo" ]; then
-		pushd "$SCRIPTDIR/repositories/$gituser" > /dev/null
+		pushd "$SCRIPTDIR/repositories/$gituser" >/dev/null
 		git clone $repo
 	else
 		# otherwise, pull the latest changes
-		pushd "$SCRIPTDIR/repositories/$gituser/$gitrepo" > /dev/null
+		pushd "$SCRIPTDIR/repositories/$gituser/$gitrepo" >/dev/null
 		git pull
 	fi
-	popd > /dev/null
+	popd >/dev/null
 done
 
 echo -e "${COLOR_RESET}"
