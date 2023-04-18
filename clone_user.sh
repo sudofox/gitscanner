@@ -50,7 +50,7 @@ while true; do
 done
 
 for repo in $REPOS; do
-	if [[ $(comm -23 <(echo $repo | grep -Po "github.com\/\K.+?(?=\.git)") <(cat exclude.txt | egrep -v '^[[:blank:]]*#|^[[:blank:]]*$' | sort | uniq) | wc -w) -lt 1 ]]; then
+	if [[ $(comm -23 <(echo $repo | grep -Po "github.com\/\K.+?(?=\.git)") <(cat exclude.txt | grep -Ev '^[[:blank:]]*#|^[[:blank:]]*$' | sort | uniq) | wc -w) -lt 1 ]]; then
 		continue
 	fi
 

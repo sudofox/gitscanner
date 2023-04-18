@@ -13,5 +13,5 @@ COLOR_BLUE=$(tput setaf 4);
 # strip out lines from a file starting with # (comment) or blank
 
 load_config () {
-	cat $1 |egrep -v '^[[:blank:]]*#|^[[:blank:]]*$'
+	cat $1 |grep -Ev '^[[:blank:]]*#|^[[:blank:]]*$'
 }
